@@ -9,10 +9,10 @@
     <title>视频播放</title>
     <link href="https://web.sdk.qcloud.com/player/tcplayer/release/v4.8.0/tcplayer.min.css" rel="stylesheet">
     </link>
-    <!--如果需要在 Chrome 和 Firefox 等现代浏览器中通过 H5 播放 HLS 格式的视频，需要在 tcplayer.v4.2.min.js 之前引入 hls.min.0.13.2m.js。-->    
+    <!--如果需要在 Chrome 和 Firefox 等现代浏览器中通过 H5 播放 HLS 格式的视频，需要在 tcplayer.v4.2.min.js 之前引入 hls.min.0.13.2m.js。-->
     <script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.8.0/libs/hls.min.1.1.6.js"></script>
     <!--播放器脚本文件-->
-    <script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.8.0/tcplayer.v4.8.0.min.js"></script>    
+    <script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.8.0/tcplayer.v4.8.0.min.js"></script>
     <style>
         html,
         body {
@@ -64,7 +64,12 @@
         var videoSrc = decodeURIComponent(getQueryVariable('src'));
         var poster = decodeURIComponent(getQueryVariable('poster'));
 
+        // autoplay相关的限制参考：主流的是可以静音自动播放
+        // https://blog.google/products/chrome/improving-autoplay-chrome/
+        // https://cloud.tencent.com/document/product/881/20219#.E6.B5.8F.E8.A7.88.E5.99.A8.E5.8A.AB.E6.8C.81.E8.A7.86.E9.A2.91.E6.92.AD.E6.94.BE
         var tcplayer = TCPlayer("player-container-id", {
+            autoplay: true,
+            muted: false,
             reportable: false,
             poster: poster,
             plugins: {
